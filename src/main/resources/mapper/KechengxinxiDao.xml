@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cl.dao.KechengxinxiDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.cl.entity.KechengxinxiEntity" id="kechengxinxiMap">
+        <result property="kechengmingcheng" column="kechengmingcheng"/>
+        <result property="kechengfengmian" column="kechengfengmian"/>
+        <result property="kechengleixing" column="kechengleixing"/>
+        <result property="kechengjianjie" column="kechengjianjie"/>
+        <result property="kechengshipin" column="kechengshipin"/>
+        <result property="fabushijian" column="fabushijian"/>
+        <result property="storeupnum" column="storeupnum"/>
+        <result property="thumbsupnum" column="thumbsupnum"/>
+        <result property="crazilynum" column="crazilynum"/>
+        <result property="jiaoshizhanghao" column="jiaoshizhanghao"/>
+        <result property="jiaoshixingming" column="jiaoshixingming"/>
+    </resultMap>
+
+    <select id="selectListView"
+		resultType="com.cl.entity.view.KechengxinxiView" >
+
+		SELECT  kechengxinxi.* FROM kechengxinxi  kechengxinxi 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.cl.entity.view.KechengxinxiView" >
+		SELECT * FROM kechengxinxi  kechengxinxi <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectGroupBy"
+		resultType="com.cl.entity.view.KechengxinxiView" >
+		select userid,username,paperid,papername,sum(myscore) myscore,ROUND(sum(case when myscore>0 then 1 else 0 end)/(sum(1)),2) accuracy from examrecord     
+        <where> 1=1 ${ew.sqlSegment}</where>
+        group by userid,username,paperid,papername  
+	</select>
+
+</mapper>
